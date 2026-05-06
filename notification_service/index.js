@@ -1,7 +1,9 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = 80;
 
+app.use(cors());
 app.use(express.json());
 
 app.post('/notify/', (req, res) => {

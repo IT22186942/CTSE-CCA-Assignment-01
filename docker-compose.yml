@@ -1,0 +1,29 @@
+version: '3.8'
+services:
+  user-service:
+    build: ./user_service
+    ports:
+      - "8001:80"
+
+  product-service:
+    build: ./product_service
+    ports:
+      - "8002:80"
+
+  notification-service:
+    build: ./notification_service
+    ports:
+      - "8004:80"
+
+  order-service:
+    build: ./order_service
+    ports:
+      - "8003:80"
+    environment:
+      - USER_SERVICE_URL=http://user-service:80
+      - PRODUCT_SERVICE_URL=http://product-service:80
+      - NOTIFICATION_SERVICE_URL=http://notification-service:80
+    depends_on:
+      - user-service
+      - product-service
+      - notification-service

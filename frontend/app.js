@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadProducts() {
     const grid = document.getElementById('productGrid');
-    
+
     try {
         const products = [];
         // Fetch details for each known product from the Product Service
@@ -36,8 +36,14 @@ function renderProducts(products) {
 
     products.forEach(product => {
         // Determine a simple emoji icon based on product name
-        const icon = product.name.toLowerCase().includes('laptop') ? '💻' : '🖱️';
-        
+        let icon = '🖱️'; // default mouse
+        const nameLower = product.name.toLowerCase();
+        if (nameLower.includes('laptop')) icon = '💻';
+        else if (nameLower.includes('keyboard')) icon = '⌨️';
+        else if (nameLower.includes('monitor')) icon = '🖥️';
+        else if (nameLower.includes('headphones')) icon = '🎧';
+        else if (nameLower.includes('hub')) icon = '🔌';
+
         const card = document.createElement('div');
         card.className = 'product-card';
         card.innerHTML = `
@@ -61,7 +67,7 @@ async function placeOrder(productId) {
     const userId = document.getElementById('userSelect').value;
     const btn = event.target;
     const originalText = btn.innerText;
-    
+
     // UI Feedback
     btn.innerText = 'Processing...';
     btn.disabled = true;
@@ -108,7 +114,7 @@ function showToast(title, message, type = 'success') {
             <p>${message}</p>
         </div>
     `;
-    
+
     container.appendChild(toast);
 
     // Remove from DOM after animation completes (4s + 0.4s)

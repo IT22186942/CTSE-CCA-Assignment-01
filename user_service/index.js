@@ -8,7 +8,9 @@ app.use(express.json());
 
 const users = {
     "1": { id: "1", name: "John Doe", email: "john@example.com" },
-    "2": { id: "2", name: "Jane Smith", email: "jane@example.com" }
+    "2": { id: "2", name: "Jane Smith", email: "jane@example.com" },
+    "3": { id: "3", name: "Alice Johnson", email: "alice@example.com" },
+    "4": { id: "4", name: "Bob Williams", email: "bob@example.com" }
 };
 
 app.get('/users/:user_id', (req, res) => {

@@ -3,7 +3,7 @@ const CONFIG = {
     ORDER_SERVICE_URL: 'https://ctse-order-service.thankfuldune-f67cd50d.centralindia.azurecontainerapps.io',
     PRODUCT_SERVICE_URL: 'https://ctse-product-service.thankfuldune-f67cd50d.centralindia.azurecontainerapps.io',
     // Known product IDs from our backend implementation
-    PRODUCT_IDS: ['101', '102']
+    PRODUCT_IDS: ['101', '102', '103', '104', '105', '106']
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -83,6 +83,8 @@ async function placeOrder(productId) {
 
         if (response.ok) {
             showToast('Order Successful', `Total amount charged: $${data.order_details.total_price.toFixed(2)}`, 'success');
+            // Refresh products to show new stock numbers
+            loadProducts();
         } else {
             showToast('Order Failed', data.detail || 'Failed to place order', 'error');
         }

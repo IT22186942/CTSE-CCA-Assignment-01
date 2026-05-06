@@ -26,10 +26,13 @@ app.post('/orders/', async (req, res) => {
             return res.status(400).json({ detail: `Insufficient stock. Only ${product.stock} available.` });
         }
         
-        // 3. Calculate Total
+        // 3. Deduct Stock
+        await axios.post(`${PRODUCT_SERVICE_URL}/products/${product_id}/reduce-stock`, { quantity });
+        
+        // 4. Calculate Total
         const totalPrice = product.price * quantity;
         
-        // 4. Send Notification
+        // 5. Send Notification
         const notificationPayload = {
             message: `Order confirmed for user ${user_id}. Product: ${product.name}, Qty: ${quantity}, Total: $${totalPrice}`
         };

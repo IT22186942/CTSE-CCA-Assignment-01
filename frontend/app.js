@@ -12,8 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function loadProducts() {
     const grid = document.getElementById('productGrid');
-    grid.innerHTML = '<div class="loader">Fetching live data from Azure Microservices...</div>';
-
+    
     try {
         const products = [];
         // Fetch details for each known product from the Product Service
@@ -36,9 +35,15 @@ function renderProducts(products) {
     grid.innerHTML = '';
 
     products.forEach(product => {
+        // Determine a simple emoji icon based on product name
+        const icon = product.name.toLowerCase().includes('laptop') ? '💻' : '🖱️';
+        
         const card = document.createElement('div');
         card.className = 'product-card';
         card.innerHTML = `
+            <div class="product-image-placeholder">
+                ${icon}
+            </div>
             <div class="product-info">
                 <h3>${product.name}</h3>
                 <div class="product-price">$${product.price.toFixed(2)}</div>
@@ -77,12 +82,12 @@ async function placeOrder(productId) {
         const data = await response.json();
 
         if (response.ok) {
-            showToast(`Success! ${data.status}. Total: $${data.order_details.total_price.toFixed(2)}`, 'success');
+            showToast('Order Successful', `Total amount charged: $${data.order_details.total_price.toFixed(2)}`, 'success');
         } else {
-            showToast(`Error: ${data.detail || 'Failed to place order'}`, 'error');
+            showToast('Order Failed', data.detail || 'Failed to place order', 'error');
         }
     } catch (error) {
-        showToast(`Network Error: Cannot reach Order Service`, 'error');
+        showToast('Network Error', 'Cannot reach Order Service', 'error');
         console.error("Order error:", error);
     } finally {
         // Reset button
@@ -91,11 +96,16 @@ async function placeOrder(productId) {
     }
 }
 
-function showToast(message, type = 'success') {
+function showToast(title, message, type = 'success') {
     const container = document.getElementById('toast-container');
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
-    toast.innerText = message;
+    toast.innerHTML = `
+        <div class="toast-content">
+            <h4>${title}</h4>
+            <p>${message}</p>
+        </div>
+    `;
     
     container.appendChild(toast);
 

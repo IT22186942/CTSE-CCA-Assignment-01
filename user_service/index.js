@@ -21,7 +21,7 @@ app.get('/users/:user_id', (req, res) => {
 });
 
 app.get('/health', (req, res) => {
-    res.json({ status: "healthyok" });
+    res.json({ status: "healthy" });
 });
 
 app.listen(port, () => {

@@ -4,34 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Microstore | Premium Tech</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="background-shapes">
-        <div class="shape shape-1"></div>
-        <div class="shape shape-2"></div>
-        <div class="shape shape-3"></div>
-    </div>
+    <div class="ambient-background"></div>
 
-    <main class="glass-container">
-        <header>
-            <h1>Microstore</h1>
-            <p>Microservice E-Commerce Architecture</p>
-            <div class="user-selector">
-                <label for="userSelect">Shopping as:</label>
+    <nav class="glass-nav">
+        <div class="logo">
+            <span class="logo-icon">✨</span> Microstore
+        </div>
+        <div class="user-selector">
+            <label for="userSelect">Shopping as:</label>
+            <div class="custom-select">
                 <select id="userSelect">
                     <option value="1">John Doe (ID: 1)</option>
                     <option value="2">Jane Smith (ID: 2)</option>
                 </select>
             </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="hero">
+            <h1>The Future of <span>Microservices</span></h1>
+            <p>Experience seamless architecture powered by Azure Container Apps.</p>
         </header>
 
         <section class="products-section">
-            <h2>Featured Products</h2>
+            <div class="section-header">
+                <h2>Featured Products</h2>
+                <div class="accent-line"></div>
+            </div>
+            
             <div class="product-grid" id="productGrid">
-                <!-- Products injected via JS -->
-                <div class="loader">Loading products from Azure...</div>
+                <div class="loader">
+                    <div class="spinner"></div>
+                    <p>Connecting to Azure Microservices...</p>
+                </div>
             </div>
         </section>
     </main>
